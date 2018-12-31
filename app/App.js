@@ -1,16 +1,19 @@
+import Router from './router'
+// redirect src to app folder
+import React from 'react'
+import { createStore, applyMiddleware } from 'redux'
+import { Provider } from 'react-redux'
+import thunk from 'redux-thunk'
+// import reducer, { types } from './reducer'
 
-import React, { Component } from 'react';
-import { Text, View } from 'react-native';
-import styles from './styles'
 
-export default class App extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-      </View>
-    );
-  }
-}
+const store = createStore(
+  // reducer,
+  applyMiddleware(thunk),
+)
 
+export default () => (
+  <Provider store={store}>
+    <Router />
+  </Provider>
+)
